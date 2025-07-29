@@ -78,18 +78,20 @@ def display_menu():
     running = True
 
     while running:
-        print("1) Play\n2) Score\n3)Exit")
+        print("1) Play\n2) Score\n3) Exit")
 
         def choose():
-            choice = input("Enter your option: ")
-            if choice == '1': play()
-            elif choice == '2': display_score()
-            elif choice == '3': running = False
-            else:
-                print("Invalid Option!!!")
-                choose()
+            return input("Enter your option: ")
+        
+        choice = choose()
+        if choice == '1': play()
+        elif choice == '2': display_score()
+        elif choice == '3': running = False
+        else:
+            print("Invalid Option!!!")
+            choose()
 
-        choose()
+        
 
 
 def main():
