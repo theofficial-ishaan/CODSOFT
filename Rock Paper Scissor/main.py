@@ -13,10 +13,11 @@ import random
 choices = ['rock', 'paper', 'scissors']
 user_score = 0
 comp_score = 0
+tie = 0
 
-
+ 
 def user_input():
-    user_choice = input("Enter your choice: ").lower().strip()
+    user_choice = input("Enter your choice (rock, paper, scissors): ").lower().strip()
     if user_choice not in choices:
         print("Please only choose from the Available choices!")
         user_input()
@@ -44,10 +45,12 @@ def get_winner(user, comp):
 
 def exit_game():
     choice = input("Do You wanna keep playing? (y/n): ")
-    if choice == 'n':
-        print("Exiting game...")
+    if choice == 'y': 
+        return True
+    elif choice == 'n':
+        print("Exiting match!!...")
         return False
-    else: return True
+
 
 
 def play():
@@ -55,48 +58,52 @@ def play():
     running = True
 
     while running:
+        global user_score, comp_score, tie
+
         print('Round begins!')
         user_choice = user_input()
         comp_choice = random.choice(choices)
         print("Computer chooses:", comp_choice)
         if user_choice == comp_choice:
-            print("Tie")
+            tie += 1
+            print("It's a Tie")
             running = exit_game()
         else:
             winner = get_winner(user= user_choice, comp=comp_choice)
-            print("Winner:", winner)
+            if winner == 'user': 
+                user_score += 1
+                print("You Win! ")
+            else: 
+                comp_score += 1
+                print("You Lose :( ")
             running = exit_game()
 
 
 def display_score():
-    
-    print(f'Player: {user_score} | Computer: {comp_score}')
+    print(f'==================================\nPlayer: {user_score} | Computer: {comp_score} | Ties: {tie}\n==================================')
 
 
-def display_menu():
+def choose_option():
+  return input("Enter your option (1,2,3): ")
 
+
+def main_menu():
+
+    print("==================================\n=======ROCK PAPER SCISSORS!=======\n==================================")
     running = True
 
     while running:
         print("1) Play\n2) Score\n3) Exit")
 
-        def choose():
-            return input("Enter your option: ")
-        
-        choice = choose()
+        choice = choose_option()
         if choice == '1': play()
         elif choice == '2': display_score()
-        elif choice == '3': running = False
+        elif choice == '3': 
+            print("Thanks for playing!!!")
+            running = False
         else:
             print("Invalid Option!!!")
-            choose()
-
-        
-
-
-def main():
-    display_menu()
 
 
 if __name__ == '__main__':
-    main()
+    main_menu()

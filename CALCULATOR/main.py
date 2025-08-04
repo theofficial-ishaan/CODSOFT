@@ -21,4 +21,5 @@ def calc():
     except ValueError:
         print("Please enter numeric values only!!"); calc()
    
+   
 calc()
