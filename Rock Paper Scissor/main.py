@@ -17,30 +17,24 @@ tie = 0
 
  
 def user_input():
-    user_choice = input("Enter your choice (rock, paper, scissors): ").lower().strip()
-    if user_choice not in choices:
+    while True:
+        user_choice = input("Enter your choice (rock, paper, scissors): ").lower().strip()
+        if user_choice in choices:
+            return user_choice
         print("Please only choose from the Available choices!")
-        user_input()
-    return user_choice
 
 
 def get_winner(user, comp):
 
     if user == 'rock':
-        if comp == 'paper':
-            return 'Computer'
-        elif comp == 'scissors':
-            return 'user'
+        if comp == 'paper': return 'Computer'
+        elif comp == 'scissors': return 'User'
     elif user == 'paper':
-        if comp == 'rock':
-            return 'Computer'
-        elif comp == 'scissors':
-            return 'user'
+        if comp == 'rock': return 'User'
+        elif comp == 'scissors': return 'Computer'
     elif user == 'scissors':
-        if comp == 'rock':
-            return 'Computer'
-        elif comp == 'paper':
-            return 'user'
+        if comp == 'rock': return 'Computer'
+        elif comp == 'paper': return 'User'
     
 
 def exit_game():
@@ -50,7 +44,6 @@ def exit_game():
     elif choice == 'n':
         print("Exiting match!!...")
         return False
-
 
 
 def play():
@@ -70,10 +63,10 @@ def play():
             running = exit_game()
         else:
             winner = get_winner(user= user_choice, comp=comp_choice)
-            if winner == 'user': 
+            if winner == 'User': 
                 user_score += 1
                 print("You Win! ")
-            else: 
+            elif winner == 'Computer': 
                 comp_score += 1
                 print("You Lose :( ")
             running = exit_game()
